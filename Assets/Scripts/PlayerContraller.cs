@@ -7,17 +7,22 @@ public class PlayerContraller : MonoBehaviour {
     //Variables del mov del personaje
     public float jumpForce = 6f;
     Rigidbody2D rigidBody;
+    Animator animator;
+
+    const string STATE_ALIVE = "isAlive";
+    const string STATE_ON_THE_GROUND = "isOnTheGround";
 
     public LayerMask groundMask;
 
     void Awake() {
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+        animator.SetBool(STATE_ALIVE, true);
+        animator.SetBool(STATE_ON_THE_GROUND, true);
     }
 
     // Update is called once per frame
@@ -26,7 +31,7 @@ public class PlayerContraller : MonoBehaviour {
             Jump();
         }
 
-
+        animator.SetBool(STATE_ON_THE_GROUND, IsTouchingTheGround());
 
         Debug.DrawRay(this.transform.position, Vector2.down*1.5f, Color.red);
         
@@ -43,10 +48,12 @@ public class PlayerContraller : MonoBehaviour {
     bool IsTouchingTheGround() {
        if (Physics2D.Raycast(this.transform.position, Vector2.down, 1.5f, groundMask)) {
             //TODO: Programar logica de contacto con el suelo
+            animator.enabled = true;
             return true;
        }else
        {
         //TODO: programar logica de no contacto
+        animator.enabled = false;
         return false;
        }
     }
