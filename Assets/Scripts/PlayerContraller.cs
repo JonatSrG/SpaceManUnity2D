@@ -8,6 +8,8 @@ public class PlayerContraller : MonoBehaviour {
     public float jumpForce = 6f;
     Rigidbody2D rigidBody;
 
+    public LayerMask groundMask;
+
     void Awake() {
         rigidBody = GetComponent<Rigidbody2D>();
     }
@@ -20,13 +22,32 @@ public class PlayerContraller : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButtonDown(0)){
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)){
             Jump();
         }
+
+
+
+        Debug.DrawRay(this.transform.position, Vector2.down*1.5f, Color.red);
         
     }
 
     void Jump() {
+
+        if (IsTouchingTheGround()){
         rigidBody.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+        }
+
+    }
+
+    bool IsTouchingTheGround() {
+       if (Physics2D.Raycast(this.transform.position, Vector2.down, 1.5f, groundMask)) {
+            //TODO: Programar logica de contacto con el suelo
+            return true;
+       }else
+       {
+        //TODO: programar logica de no contacto
+        return false;
+       }
     }
 }
