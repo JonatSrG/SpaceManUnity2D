@@ -6,7 +6,7 @@ public class PlayerContraller : MonoBehaviour {
 
     //Variables del mov del personaje
     public float jumpForce = 6f;
-    Rigidbody2D = rigidBody;
+    Rigidbody2D rigidBody;
 
     void Awake() {
         rigidBody = GetComponent<Rigidbody2D>();
