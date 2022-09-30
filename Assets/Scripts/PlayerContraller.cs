@@ -54,13 +54,14 @@ public class PlayerContraller : MonoBehaviour {
     }
 
     bool IsTouchingTheGround() {
-       if (Physics2D.Raycast(this.transform.position, Vector2.down, 1.5f, groundMask)) {
+       if (Physics2D.Raycast(this.transform.position, 
+       Vector2.down, 1.5f, groundMask)) {
             //TODO: Programar logica de contacto con el suelo
-            
+            GameManager.sharedInstance.currentGameState = GameState.inGame;
             return true;
        }else
        {
-        
+            //TODO: programar la logica de no contacto
         return false;
        }
     }
