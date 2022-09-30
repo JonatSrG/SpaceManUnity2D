@@ -52,7 +52,6 @@ public class PlayerContraller : MonoBehaviour {
             return true;
        }else
        {
-        //TODO: programar logica de no contacto
         
         return false;
        }
