@@ -23,6 +23,7 @@ public class CamaraFollow : MonoBehaviour {
     }
 
     // Update is called once per frame
+    //Empezando carpta 4
     void Update() {
 
         MoveCamara(true);
