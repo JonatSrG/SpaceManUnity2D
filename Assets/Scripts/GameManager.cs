@@ -54,8 +54,9 @@ public class GameManager : MonoBehaviour {
         }else if(newGameState == GameState.inGame){
             //TODO: hay que preparar la escena para jugar
             LevelManager.sharedInstance.RemoveAllLevelBlock();
-            Invoke("ReloadLevel", 0.1f);
-            
+            LevelManager.sharedInstance.GenerateInitialBlock();
+            controller.StartGame();
+
         }else if(newGameState == GameState.gameOver) {
             //TODO: preparar el juego para el Game Over
         }
@@ -63,10 +64,9 @@ public class GameManager : MonoBehaviour {
         this.currentGameState = newGameState;
     }
 
-    void ReloadLevel() {
-LevelManager.sharedInstance.GenerateInitialBlock();
-            controller.StartGame();
-    }
+    /* void ReloadLevel() {
+
+    } */
 
 
 }
