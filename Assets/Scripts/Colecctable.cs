@@ -6,10 +6,7 @@ public enum  CollectableType {
     healthPotion,
     manaPotion,
     money
-}
-{
-    
-}
+    }
 
 public class Colecctable : MonoBehaviour {
     // Start is called before the first frame update
@@ -17,6 +14,8 @@ public class Colecctable : MonoBehaviour {
 
     private SpriteRenderer sprite;
     private CircleCollider2D itemCollider;
+
+    public int collectedObject = 0;
 
     bool hasBeenCollected = false;
 
@@ -47,6 +46,7 @@ public class Colecctable : MonoBehaviour {
         {
             case CollectableType.money:
             //Logica de la Moneda
+            GameManager.sharedInstance.CollectObject(this);
             break;
 
             case CollectableType.healthPotion:
@@ -67,5 +67,10 @@ public class Colecctable : MonoBehaviour {
             Destroy(gameObject);
             Collect();
         }
+    }
+    
+    public void CollectObject(Collectable collectable) {
+
+        collectedObject += collectable.value;
     }
 }
